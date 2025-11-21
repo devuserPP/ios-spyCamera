@@ -2,6 +2,7 @@
 - nahrazeni ikon z assetu na sf symboly
 - Přidal jsem podporu “swipe to delete” u historie
 - prvni pokus integrace tracker detector
+- druhy pokus o integraci
 
 TODO:
 - nastavit novy app name a bundle

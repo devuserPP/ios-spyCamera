@@ -12,7 +12,8 @@ class BluetoothDevice: Device {
     @Published var rssi: NSNumber
     @Published var peripheral: CBPeripheral?
     private var lastUpdate: Date?
-    
+    private(set) var advertisementData: [String: Any] = [:]
+
     init(id: String, rssi: NSNumber, peripheral: CBPeripheral?) {
         self.rssi = rssi
         self.peripheral = peripheral
@@ -61,5 +62,14 @@ class BluetoothDevice: Device {
         
         self.rssi = RSSI
         self.lastUpdate = Date()
+    }
+    
+    func updateAdvertisement(_ data: [String: Any]) {
+        self.advertisementData = data
+    }
+    
+    /// Classification result derived from advertisement data.
+    var trackerClassification: ManualTrackerClassification {
+        ManualTrackerClassifier.classify(advertisementData: advertisementData, name: deviceName())
     }
 }

@@ -15,9 +15,12 @@ final class ManualScanViewModel: NSObject, ObservableObject {
     @Published var bluetoothState: CBManagerState = .unknown
     @Published var isScanning: Bool = false
     @Published var isShowingPermissionDialog: Bool = false
+    @Published var elapsedSeconds: Double = 0
+    @Published var showSecondaryHint: Bool = false
     
     private let dao = ManualScanDAO()
-    private let clock = Date()
+    private var scanStart: Date?
+    private var tickTimer: Timer?
     
     override init() {
         super.init()
@@ -26,6 +29,8 @@ final class ManualScanViewModel: NSObject, ObservableObject {
     
     func startScanning() {
         isScanning = true
+        scanStart = Date()
+        startTick()
         ManualScanManager.shared.delegate = self
         ManualScanManager.shared.start()
         reloadHistory()
@@ -34,6 +39,8 @@ final class ManualScanViewModel: NSObject, ObservableObject {
     func stopScanning() {
         isScanning = false
         ManualScanManager.shared.stop()
+        tickTimer?.invalidate()
+        tickTimer = nil
     }
     
     var potentialTrackers: [ManualScanDevice] {
@@ -68,6 +75,19 @@ final class ManualScanViewModel: NSObject, ObservableObject {
     
     @objc private func reloadHistory() {
         historyDevices = dao.historyDevices()
+    }
+    
+    private func startTick() {
+        tickTimer?.invalidate()
+        tickTimer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) { [weak self] _ in
+            guard let self else { return }
+            if let start = scanStart {
+                elapsedSeconds = Date().timeIntervalSince(start)
+            }
+            withAnimation {
+                self.showSecondaryHint.toggle()
+            }
+        }
     }
 }
 

@@ -50,6 +50,10 @@ extension ManualScanDevice {
         rlm.firstSeen = firstSeen.timeIntervalSince1970
         rlm.rssi = rssi
         rlm.isTrusted = isTrusted
+        rlm.type = trackerKind.rawValue
+        rlm.vendor = vendor
+        rlm.connectionStatus = connectionStatus.rawValue
+        rlm.eventCount = eventCount
         return rlm
     }
 }

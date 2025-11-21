@@ -149,6 +149,11 @@
 		B0D8690A2ED022DE00F16496 /* ManualScanCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D869032ED022DE00F16496 /* ManualScanCoordinator.swift */; };
 		B0D8690B2ED022DE00F16496 /* ManualScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D869042ED022DE00F16496 /* ManualScanView.swift */; };
 		B0D8690D2ED023DA00F16496 /* ManualScanDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D8690C2ED023DA00F16496 /* ManualScanDevice.swift */; };
+		B0D869102ED0324500F16496 /* ManualTrackerClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D8690E2ED0324500F16496 /* ManualTrackerClassification.swift */; };
+		B0D869112ED0324500F16496 /* ManualTrackerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D8690F2ED0324500F16496 /* ManualTrackerType.swift */; };
+		B0D869132ED0342100F16496 /* ManualScanEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D869122ED0342100F16496 /* ManualScanEvent.swift */; };
+		B0D869152ED0344300F16496 /* ManualScanEventDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D869142ED0344300F16496 /* ManualScanEventDAO.swift */; };
+		B0D869172ED0345200F16496 /* RlmManualScanEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D869162ED0345200F16496 /* RlmManualScanEvent.swift */; };
 		BB023A3D1A38E1D3F4A480E9 /* Pods_HiddenCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6A234657A5479F0B6265BFC /* Pods_HiddenCamera.framework */; };
 		F4D6583D2D3E0F93007043D9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D6583C2D3E0F93007043D9 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
@@ -295,6 +300,11 @@
 		B0D869052ED022DE00F16496 /* ManualScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualScanViewController.swift; sourceTree = "<group>"; };
 		B0D869062ED022DE00F16496 /* ManualScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualScanViewModel.swift; sourceTree = "<group>"; };
 		B0D8690C2ED023DA00F16496 /* ManualScanDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualScanDevice.swift; sourceTree = "<group>"; };
+		B0D8690E2ED0324500F16496 /* ManualTrackerClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTrackerClassification.swift; sourceTree = "<group>"; };
+		B0D8690F2ED0324500F16496 /* ManualTrackerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTrackerType.swift; sourceTree = "<group>"; };
+		B0D869122ED0342100F16496 /* ManualScanEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualScanEvent.swift; sourceTree = "<group>"; };
+		B0D869142ED0344300F16496 /* ManualScanEventDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualScanEventDAO.swift; sourceTree = "<group>"; };
+		B0D869162ED0345200F16496 /* RlmManualScanEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RlmManualScanEvent.swift; sourceTree = "<group>"; };
 		B6A234657A5479F0B6265BFC /* Pods_HiddenCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HiddenCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D38A84736AD64ED2E350337F /* Pods-HiddenCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiddenCamera.release.xcconfig"; path = "Target Support Files/Pods-HiddenCamera/Pods-HiddenCamera.release.xcconfig"; sourceTree = "<group>"; };
 		F4D6583C2D3E0F93007043D9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -411,6 +421,8 @@
 				852E29232D27E90600293218 /* LocalNetworkDetector.swift */,
 				B0D869012ED022A400F16496 /* ManualScanManager.swift */,
 				857F242C2D2E805D00AFDA73 /* RequestLocalNetworkAuthorization.swift */,
+				B0D8690E2ED0324500F16496 /* ManualTrackerClassification.swift */,
+				B0D8690F2ED0324500F16496 /* ManualTrackerType.swift */,
 				85E3C6002D2BB27100BBAFBE /* BluetoothScanner.swift */,
 				852E29242D27E90600293218 /* NetworkUtils.swift */,
 				853D48162D2CD32500644A55 /* NetworkManager.swift */,
@@ -442,6 +454,7 @@
 			children = (
 				85699C502D268A9B0000E5A6 /* CameraResultItem.swift */,
 				B0D8690C2ED023DA00F16496 /* ManualScanDevice.swift */,
+				B0D869122ED0342100F16496 /* ManualScanEvent.swift */,
 				853D48352D2D2A1300644A55 /* ScanOptionItem.swift */,
 			);
 			path = Model;
@@ -486,6 +499,7 @@
 			isa = PBXGroup;
 			children = (
 				B0D868FF2ED0228600F16496 /* ManualScanDAO.swift */,
+				B0D869142ED0344300F16496 /* ManualScanEventDAO.swift */,
 				857F24212D2E567500AFDA73 /* Model */,
 				85699C532D2690C50000E5A6 /* RealmDAO.swift */,
 				85699C572D2692480000E5A6 /* CameraResultDAO.swift */,
@@ -535,6 +549,7 @@
 			isa = PBXGroup;
 			children = (
 				B0D868FD2ED0227500F16496 /* RlmManualScanDevice.swift */,
+				B0D869162ED0345200F16496 /* RlmManualScanEvent.swift */,
 				85699C552D2691C20000E5A6 /* RlmCameraResult.swift */,
 				857F24222D2E568700AFDA73 /* RlmScanHistory.swift */,
 			);
@@ -1034,6 +1049,7 @@
 				852E28FD2D2799EA00293218 /* BoundingBox.swift in Sources */,
 				85DA72742D1EA526008F5589 /* AppCoordinator.swift in Sources */,
 				85A5EAF42D23DEE2008B58EB /* CameraManager.swift in Sources */,
+				B0D869152ED0344300F16496 /* ManualScanEventDAO.swift in Sources */,
 				85EDFA5A2D310027002BF8F3 /* AdsInterstitial.swift in Sources */,
 				852E29112D27E87300293218 /* WifiScannerView.swift in Sources */,
 				85DA726D2D1EA436008F5589 /* BaseViewModel.swift in Sources */,
@@ -1041,6 +1057,7 @@
 				85E3C5F32D2B8E8100BBAFBE /* PermissionDialogView.swift in Sources */,
 				85DA727F2D1EA810008F5589 /* Permission.swift in Sources */,
 				857AF9322D2F888A004C8016 /* SplashCoordinator.swift in Sources */,
+				B0D869172ED0345200F16496 /* RlmManualScanEvent.swift in Sources */,
 				857AF9332D2F888A004C8016 /* SplashViewController.swift in Sources */,
 				857AF9342D2F888A004C8016 /* SplashViewModel.swift in Sources */,
 				85EDFA582D30FAD9002BF8F3 /* UserSetting.swift in Sources */,
@@ -1076,9 +1093,12 @@
 				85699C482D2649600000E5A6 /* CameraResultViewController.swift in Sources */,
 				853D483E2D2D333E00644A55 /* HistoryDetailCoordinator.swift in Sources */,
 				853D483F2D2D333E00644A55 /* HistoryDetailViewController.swift in Sources */,
+				B0D869132ED0342100F16496 /* ManualScanEvent.swift in Sources */,
 				857AF9232D2F6E44004C8016 /* SubscriptionView.swift in Sources */,
 				853D48402D2D333E00644A55 /* HistoryDetailViewModel.swift in Sources */,
 				B0D868FE2ED0227500F16496 /* RlmManualScanDevice.swift in Sources */,
+				B0D869102ED0324500F16496 /* ManualTrackerClassification.swift in Sources */,
+				B0D869112ED0324500F16496 /* ManualTrackerType.swift in Sources */,
 				85699C492D2649600000E5A6 /* CameraResultViewModel.swift in Sources */,
 				85E3C6012D2BB27100BBAFBE /* BluetoothScanner.swift in Sources */,
 				85240FD92D30CDCD000EEAC6 /* SettingView.swift in Sources */,

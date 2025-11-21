@@ -102,8 +102,10 @@ extension BluetoothScanner: CBCentralManagerDelegate {
             
             device.peripheral = peripheral
             device.updateRSSI(RSSI: RSSI)
+            device.updateAdvertisement(advertisementData)
         } else {
             let device = BluetoothDevice(id: peripheral.identifier.uuidString, rssi: RSSI, peripheral: peripheral)
+            device.updateAdvertisement(advertisementData)
             
             if device.deviceName() != nil {
                 self.devices.insert(device, at: 0)

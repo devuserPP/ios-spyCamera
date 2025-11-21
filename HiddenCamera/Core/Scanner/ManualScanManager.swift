@@ -22,6 +22,7 @@ final class ManualScanManager: NSObject {
     private var previousDelegate: BluetoothScannerDelegate?
     private var timer: Timer?
     private let dao = ManualScanDAO()
+    private let eventDAO = ManualScanEventDAO()
     
     private override init() {
         super.init()
@@ -59,12 +60,21 @@ extension ManualScanManager: BluetoothScannerDelegate {
             let name = device.deviceName() ?? ""
             let existing = updated[device.id]
             let firstSeen = existing?.firstSeen ?? now
+            let classification = device.trackerClassification
+            let events = existing?.eventCount ?? eventDAO.events(for: device.id).count
             updated[device.id] = ManualScanDevice(id: device.id,
                                                   name: name,
                                                   rssi: device.rssi.doubleValue,
                                                   isTrusted: isTrusted,
+                                                  trackerKind: classification.kind,
+                                                  vendor: classification.vendor,
+                                                  connectionStatus: classification.connectionStatus,
+                                                  eventCount: events + 1,
                                                   firstSeen: firstSeen,
                                                   lastSeen: now)
+            
+            let event = ManualScanEvent(deviceId: device.id, timestamp: now, rssi: device.rssi.doubleValue)
+            eventDAO.addEvent(event)
         }
         
         self.devices = updated
