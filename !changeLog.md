@@ -1,5 +1,6 @@
 #### version 1.0.1
 - nahrazeni ikon z assetu na sf symboly
+- Přidal jsem podporu “swipe to delete” u historie
 
 TODO:
 - nastavit novy app name a bundle

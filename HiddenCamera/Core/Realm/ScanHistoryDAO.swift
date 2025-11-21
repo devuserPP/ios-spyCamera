@@ -14,6 +14,14 @@ final class ScanHistoryDAO: RealmDAO {
         NotificationCenter.default.post(name: .updateListHistory, object: nil)
     }
     
+    func delete(id: String) {
+        guard let object = try? super.objectWithPrimaryKey(type: RlmScanHistory.self, key: id) else {
+            return
+        }
+        try? super.deleteObject([object])
+        NotificationCenter.default.post(name: .updateListHistory, object: nil)
+    }
+    
     func getAll() -> [ScanOptionItem] {
         guard let rlmObjs = try? self.objects(type: RlmScanHistory.self) else {
             return []
@@ -39,4 +47,3 @@ extension ScanOptionItem {
 extension Notification.Name {
     static let updateListHistory = Notification.Name("updateListHistory")
 }
-

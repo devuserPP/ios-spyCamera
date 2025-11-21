@@ -27,6 +27,7 @@ struct HomeViewModelInput: InputOutputViewModel {
     var didTapScanOption = PublishSubject<()>()
     var didSelectToolOption = PublishSubject<ToolItem>()
     var removeAllScanOption = PublishSubject<()>()
+    var deleteHistoryItem = PublishSubject<ScanOptionItem>()
     
     // Tab
     var selectTab = PublishSubject<HomeTab>()
@@ -188,6 +189,15 @@ final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput
                 }
             }
             
+        }).disposed(by: self.disposeBag)
+        
+        input.deleteHistoryItem.subscribe(onNext: { [weak self] item in
+            guard let self else { return }
+            let dao = ScanHistoryDAO()
+            dao.delete(id: item.id)
+            withAnimation {
+                self.historyItems.removeAll(where: { $0.id == item.id })
+            }
         }).disposed(by: self.disposeBag)
         
         input.selectSettingItem.subscribe(onNext: { [weak self] item in
