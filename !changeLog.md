@@ -3,10 +3,10 @@
 - Přidal jsem podporu “swipe to delete” u historie
 - prvni pokus integrace tracker detector
 - druhy pokus o integraci
+- renamed and setup firebase project 
 
 TODO:
-- nastavit novy app name a bundle
-- zalozit novy projekt na firebase a stahnout novy google json
+
 
 
 

@@ -8,8 +8,8 @@
 import Foundation
 
 class AppConfig {
-    static let appName = "SpyFind Pro"
-    static let appID = "6740389656"
+    static let appName = "Spy Tracker"
+    static let appID = "6755585749"
     
     static let term = "https://sites.google.com/view/tralestore/terms-conditions"
     static let policy = "https://sites.google.com/view/tralestore/privacy-policy"
