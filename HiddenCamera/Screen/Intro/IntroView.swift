@@ -138,7 +138,7 @@ struct IntroView: View {
                             })
                             
                             if !viewModel.isPremium && viewModel.isRequested {
-                                BannerContentView(isCollapse: false, hasOneKeyAd: true, needToReload: viewModel.input.didTapContinue)
+//                                BannerContentView(isCollapse: false, hasOneKeyAd: true, needToReload: viewModel.input.didTapContinue)
                             }
                         }
                     }

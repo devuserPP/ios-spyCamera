@@ -37,8 +37,8 @@ struct CameraResultView: View {
                 Spacer(minLength: 0)
                 
                 if !viewModel.isPremium {
-                    BannerContentView(isCollapse: false, needToReload: nil)
-                        .padding(.top, 5)
+//                    BannerContentView(isCollapse: false, needToReload: nil)
+//                        .padding(.top, 5)
                 }
             }
             

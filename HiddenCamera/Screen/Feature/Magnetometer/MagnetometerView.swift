@@ -32,7 +32,7 @@ struct MagnetometerView: View {
                 Spacer()
                 
                 if !viewModel.isPremium {
-                    BannerContentView(isCollapse: false, needToReload: nil)
+//                    BannerContentView(isCollapse: false, needToReload: nil)
                 }
             }
         }.frame(width: UIScreen.main.bounds.width)

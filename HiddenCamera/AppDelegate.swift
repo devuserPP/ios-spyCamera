@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         configFirebase()
-        configGoogleAds()
+//        configGoogleAds()
         configPurchase()
         configFacebook(application: application, launchOptions: launchOptions)
         configNetworkManager()
@@ -75,13 +75,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - Google Ads
-    private func configGoogleAds() {
-        GADMobileAds.sharedInstance().start()
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [""]
-        
-        AdsAppOpen.shared.start()
-        AdsInterstitial.shared.start()
-    }
+//    private func configGoogleAds() {
+//        GADMobileAds.sharedInstance().start()
+//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [""]
+//        
+//        AdsAppOpen.shared.start()
+//        AdsInterstitial.shared.start()
+//    }
     
     // MARK: - FACEBOOK SDK
     private func configFacebook(application: UIApplication, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {

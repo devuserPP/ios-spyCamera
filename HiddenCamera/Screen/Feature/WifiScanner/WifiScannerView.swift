@@ -52,7 +52,7 @@ struct WifiScannerView: View {
             if !viewModel.isPremium && viewModel.state == .ready {
                 VStack {
                     Spacer()
-                    BannerContentView(isCollapse: false, needToReload: nil)
+//                    BannerContentView(isCollapse: false, needToReload: nil)
                 }
             }
         }
@@ -258,7 +258,7 @@ struct WifiScannerView: View {
                 .cornerRadius(16, corners: .allCorners)
                 .padding(.horizontal, 20)
             } else {
-                NativeContentView().padding(.horizontal, 20)
+//                NativeContentView().padding(.horizontal, 20)
             }
             
             Spacer()

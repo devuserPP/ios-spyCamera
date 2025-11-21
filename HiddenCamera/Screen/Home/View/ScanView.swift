@@ -157,7 +157,7 @@ struct ScanOptionView: View {
                 }).opacity(viewModel.scanOptions.isEmpty ? 0 : 1)
                 
                 if !viewModel.isPremium && viewModel.isShowingScanOption {
-                    BannerContentView(isCollapse: true, needToReload: nil)
+//                    BannerContentView(isCollapse: true, needToReload: nil)
                 }
             }
         }

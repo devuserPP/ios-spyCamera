@@ -160,7 +160,7 @@ struct CameraDetectorView: View {
                 }.padding(.bottom, 10)
                 
                 if !viewModel.isPremium && !viewModel.isTheFirst {
-                    BannerContentView(isCollapse: false, needToReload: nil)
+//                    BannerContentView(isCollapse: false, needToReload: nil)
                 }
             }
         }

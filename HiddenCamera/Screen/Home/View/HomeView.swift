@@ -112,7 +112,7 @@ struct HomeView: View {
             }
             
             if !viewModel.isPremium && viewModel.didAppear {
-                BannerContentView(isCollapse: true, needToReload: nil)
+//                BannerContentView(isCollapse: true, needToReload: nil)
             }
         }
         .background(Color.white.cornerRadius(28, corners: [.topLeft, .topRight]).ignoresSafeArea())

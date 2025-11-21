@@ -41,7 +41,7 @@ struct BluetoothScannerView: View {
                 VStack {
                     Spacer()
                     
-                    BannerContentView(isCollapse: false, needToReload: nil)
+//                    BannerContentView(isCollapse: false, needToReload: nil)
                 }
             }
         }
@@ -238,8 +238,8 @@ struct BluetoothScannerView: View {
                 .cornerRadius(16, corners: .allCorners)
                 .padding(20)
             } else {
-                NativeContentView()
-                    .padding(.horizontal, 20)
+//                NativeContentView()
+//                    .padding(.horizontal, 20)
             }
         }
     }

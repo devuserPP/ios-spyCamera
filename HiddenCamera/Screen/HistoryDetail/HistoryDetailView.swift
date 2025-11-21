@@ -66,7 +66,7 @@ struct HistoryDetailView: View {
                 Spacer()
                 
                 if !viewModel.isPremium {
-                    BannerContentView(isCollapse: true, needToReload: nil)
+//                    BannerContentView(isCollapse: true, needToReload: nil)
                 }
             }
         }

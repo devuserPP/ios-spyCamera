@@ -41,8 +41,8 @@ final class ScannerResultViewModel: BaseViewModel<ScannerResultViewModelInput, S
     private var lastUpdate: Date?
     let scanOption: ScanOptionItem?
     
-    private var nativeLoader: AdsMultiNativeLoader?
-    @Published var natives = [GADNativeAd]()
+//    private var nativeLoader: AdsMultiNativeLoader?
+//    @Published var natives = [GADNativeAd]()
     @Published var susCount: Int
     @Published var safeCount: Int
         
@@ -57,27 +57,27 @@ final class ScannerResultViewModel: BaseViewModel<ScannerResultViewModelInput, S
         
         configDiscovery()
         changeTabIfNeed()
-        configAdLoader()
+//        configAdLoader()
     }
     
-    private func configAdLoader() {
-        if isPremium {
-            return
-        }
-        
-        let count = max(susCount / 4, 1) + max(safeCount / 4, 1)
-        self.nativeLoader = AdsMultiNativeLoader(numberOfAds: count)
-        self.nativeLoader?.load()
-        self.nativeLoader?.loadSuccess.subscribe(onNext: { [weak self] in
-            guard let self, let natives = self.nativeLoader?.nativeAds else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.natives = natives
-            }
-        }).disposed(by: self.disposeBag)
-    }
+//    private func configAdLoader() {
+//        if isPremium {
+//            return
+//        }
+//        
+//        let count = max(susCount / 4, 1) + max(safeCount / 4, 1)
+//        self.nativeLoader = AdsMultiNativeLoader(numberOfAds: count)
+//        self.nativeLoader?.load()
+//        self.nativeLoader?.loadSuccess.subscribe(onNext: { [weak self] in
+//            guard let self, let natives = self.nativeLoader?.nativeAds else {
+//                return
+//            }
+//            
+//            DispatchQueue.main.async {
+//                self.natives = natives
+//            }
+//        }).disposed(by: self.disposeBag)
+//    }
     
     override func configInput() {
         super.configInput()

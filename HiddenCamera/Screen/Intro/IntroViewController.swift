@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import SwiftUI
+import AppTrackingTransparency
 
 class IntroViewController: ViewController {
     var viewModel: IntroViewModel
@@ -52,9 +53,11 @@ class IntroViewController: ViewController {
     }
     
     private func requestConsent() {
-        AdsConsentManager.shared.gatherConsent(from: self) { [weak self] _ in
+        ATTrackingManager.requestTrackingAuthorization { [weak self] status in
             DispatchQueue.main.async {
-                self?.coordinator?.stop()
+                guard let self else { return }
+                // Once the system prompt appears the intro flow should continue to the feature list.
+                self.viewModel.isRequested = status != .notDetermined
             }
         }
     }

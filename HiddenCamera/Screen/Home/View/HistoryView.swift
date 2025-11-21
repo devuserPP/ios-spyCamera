@@ -43,7 +43,7 @@ struct HistoryView: View {
                 })
                 .padding(.top, 28)
                 
-                NativeContentView().padding(.top, 20)
+//                NativeContentView().padding(.top, 20)
                 
                 Spacer()
             }.navigationBarHidden(true)
@@ -54,7 +54,7 @@ struct HistoryView: View {
                         let item = viewModel.historyItems[index]
                         
                         if index % 4 == 0 && !UserSetting.isPremiumUser {
-                            NativeContentView()
+//                            NativeContentView()
                         }
                         
                         HistoryItemView(item: item)

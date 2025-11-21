@@ -53,7 +53,7 @@ struct ScannerResultView: View {
                 .padding(.top, 8)
             
             if !UserSetting.isPremiumUser {
-                NativeContentView().padding(.horizontal, 20)
+//                NativeContentView().padding(.horizontal, 20)
             }
             
             Spacer()
@@ -107,19 +107,17 @@ struct ScannerResultView: View {
     var safeDeviceView: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 16.0) {
-                ForEach(viewModel.safeDevices.indices, id: \.self) { index in
-                    let device = viewModel.safeDevices[index]
-                    
-                    if index % 4 == 0 && !UserSetting.isPremiumUser && !viewModel.natives.isEmpty {
-                        let maxSafeNative = viewModel.safeCount == 0 ? 0 : viewModel.safeCount / 4 + 1
-                        let nativeIndex = index / 4
-                        
-                        if nativeIndex < viewModel.natives.count && nativeIndex < maxSafeNative {
-                            SmallNativeView(nativeAd: viewModel.natives[nativeIndex])
-                                .frame(height: 160)
-                                .padding(.horizontal, 20)
-                        }
-                    }
+                ForEach(Array(viewModel.safeDevices.enumerated()), id: \.offset) { index, device in
+//                    if nativeIndex < viewModel.natives.count && nativeIndex < maxSafeNative {
+//                        let maxSafeNative = viewModel.safeCount == 0 ? 0 : viewModel.safeCount / 4 + 1
+//                        let nativeIndex = index / 4
+//
+//                        if nativeIndex < viewModel.natives.count && nativeIndex < maxSafeNative {
+//                            SmallNativeView(nativeAd: viewModel.natives[nativeIndex])
+//                                .frame(height: 160)
+//                                .padding(.horizontal, 20)
+//                        }
+//                    }
                     
                     DeviceItemView(viewModel: viewModel, device: device)
                 }
@@ -138,16 +136,16 @@ struct ScannerResultView: View {
                 ForEach(viewModel.suspiciousDevices.indices, id: \.self) { index in
                     let device = viewModel.suspiciousDevices[index]
                     
-                    if index % 4 == 0 && !UserSetting.isPremiumUser && !viewModel.natives.isEmpty {
-                        let maxSafeNative = viewModel.safeCount == 0 ? 0 : viewModel.safeCount / 4 + 1
-                        let nativeIndex = maxSafeNative + index / 4
-                        
-                        if nativeIndex < viewModel.natives.count {
-                            SmallNativeView(nativeAd: viewModel.natives[nativeIndex])
-                                .frame(height: 160)
-                                .padding(.horizontal, 20)
-                        }
-                    }
+//                    if index % 4 == 0 && !UserSetting.isPremiumUser && !viewModel.natives.isEmpty {
+//                        let maxSafeNative = viewModel.safeCount == 0 ? 0 : viewModel.safeCount / 4 + 1
+//                        let nativeIndex = maxSafeNative + index / 4
+//                        
+//                        if nativeIndex < viewModel.natives.count {
+//                            SmallNativeView(nativeAd: viewModel.natives[nativeIndex])
+//                                .frame(height: 160)
+//                                .padding(.horizontal, 20)
+//                        }
+//                    }
                     
                     DeviceItemView(viewModel: viewModel, device: device)
                 }
@@ -436,10 +434,10 @@ fileprivate struct FindView: View {
                     .padding(.horizontal, 56)
                 
                 if !viewModel.isPremium {
-                    NativeContentView()
-                        .cornerRadius(5, corners: .allCorners)
-                        .padding(.top, 20)
-                        .padding(.horizontal, 20)
+//                    NativeContentView()
+//                        .cornerRadius(5, corners: .allCorners)
+//                        .padding(.top, 20)
+//                        .padding(.horizontal, 20)
                 }
             }
         }
