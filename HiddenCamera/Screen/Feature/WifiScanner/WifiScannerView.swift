@@ -61,15 +61,16 @@ struct WifiScannerView: View {
     var navigationBar: some View {
         HStack(spacing: 0) {
             if viewModel.showBackButton() {
-                Image("ic_back")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
-                    .padding(20)
-                    .background(Color.clearInteractive)
-                    .onTapGesture {
-                        viewModel.input.didTapBack.onNext(())
-                    }
+                Button(action: {
+                    viewModel.input.didTapBack.onNext(())
+                }, label: {
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(.app(.light12))
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                })
+                .buttonStyle(.plain)
             }
             
             Text(ToolItem.wifiScanner.name)

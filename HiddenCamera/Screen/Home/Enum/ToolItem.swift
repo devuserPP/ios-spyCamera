@@ -15,18 +15,18 @@ enum ToolItem: String, CaseIterable {
     case infraredCamera
     case magnetic
     
-    var icon: String {
+    var symbolName: String {
         switch self {
         case .bluetoothScanner:
-            "ic_tool_bluetooth"
+            "dot.radiowaves.left.and.right"
         case .cameraDetector:
-            "ic_tool_camera_detector"
+            "viewfinder.circle"
         case .infraredCamera:
-            "ic_tool_infrared_camera"
+            "eye.circle"
         case .magnetic:
-            "ic_tool_magnetic"
+            "waveform.path"
         case .wifiScanner:
-            "ic_tool_wifi"
+            "wifi"
         }
     }
     

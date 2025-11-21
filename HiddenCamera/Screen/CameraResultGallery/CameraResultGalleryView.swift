@@ -134,11 +134,18 @@ struct CameraResultGalleryView: View {
                     }
                     .overlay(
                         ZStack(alignment: .topTrailing) {
-                            Image("ic_close")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 24)
-                                .padding(16)
+                            Button(action: {
+                                withAnimation {
+                                    isShowingDeleteDialog = false
+                                }
+                            }, label: {
+                                Image(systemName: "xmark.circle")
+                                    .foregroundColor(.app(.light11))
+                                    .font(.system(size: 24, weight: .semibold))
+                                    .padding(16)
+                                    .contentShape(Rectangle())
+                            })
+                            .buttonStyle(.plain)
                             
                             Color.clear
                         }
@@ -153,15 +160,16 @@ struct CameraResultGalleryView: View {
     
     var navigationBar: some View {
         HStack(spacing: 0) {
-            Image("ic_back")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
-                .padding(20)
-                .background(Color.clearInteractive)
-                .onTapGesture {
-                    viewModel.input.didTapBack.onNext(())
-                }
+            Button(action: {
+                viewModel.input.didTapBack.onNext(())
+            }, label: {
+                Image(systemName: "chevron.backward")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.app(.light12))
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            })
+            .buttonStyle(.plain)
             
             Text(viewModel.title())
                 .textColor(.app(.light12))

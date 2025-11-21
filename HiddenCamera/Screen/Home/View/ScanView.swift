@@ -27,36 +27,42 @@ struct ScanView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("Press the button bellow to Scan Full")
+                Text("Press the button below to run a full scan")
                     .font(Poppins.regular.font(size: 14))
                     .textColor(.app(.light09))
                     .padding(.top, 20)
                 
-                LottieView(animation: .named("blueCircle"))
-                    .playing(loopMode: .loop)
-                    .overlay(
-                        Image("ic_home_eye")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 72)
-                    )
-                    .frame(height: UIScreen.main.bounds.width - 40 * 2)
-                    .onTapGesture {
-                        viewModel.input.didTapScanFull.onNext(())
-                    }
+                Button(action: {
+                    viewModel.input.didTapScanFull.onNext(())
+                }, label: {
+                    LottieView(animation: .named("blueCircle"))
+                        .playing(loopMode: .loop)
+                        .overlay(
+                            Image(systemName: "eye.circle.fill")
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(Color.white, Color.app(.main))
+                                .font(.system(size: 64, weight: .semibold))
+                        )
+                        .frame(height: UIScreen.main.bounds.width - 40 * 2)
+                })
+                .buttonStyle(.plain)
                 
                 HStack {
-                    ScanItemView(color: .init(rgb: 0x9747FF), icon: "ic_tool_quickscan", name: "Quick Scan")
-                        .onTapGesture {
-                            viewModel.input.didTapQuickScan.onNext(())
-                        }
+                    Button(action: {
+                        viewModel.input.didTapQuickScan.onNext(())
+                    }, label: {
+                        ScanItemView(color: .init(rgb: 0x9747FF), symbolName: "bolt.shield", name: "Quick Scan")
+                    })
+                    .buttonStyle(.plain)
                     
                     Spacer()
                     
-                    ScanItemView(color: .init(rgb: 0xFFA63D), icon: "ic_tool_scanoption", name: "Scan Options")
-                        .onTapGesture {
-                            viewModel.input.didTapScanOption.onNext(())
-                        }
+                    Button(action: {
+                        viewModel.input.didTapScanOption.onNext(())
+                    }, label: {
+                        ScanItemView(color: .init(rgb: 0xFFA63D), symbolName: "slider.horizontal.3", name: "Scan Options")
+                    })
+                    .buttonStyle(.plain)
                 }
                             
                 Spacer(minLength: 0)
@@ -79,17 +85,18 @@ struct ScanOptionView: View {
             
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    Image("ic_back")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
-                        .padding(20)
-                        .background(Color.clearInteractive)
-                        .onTapGesture {
-                            withAnimation {
-                                viewModel.isShowingScanOption = false
-                            }
+                    Button(action: {
+                        withAnimation {
+                            viewModel.isShowingScanOption = false
                         }
+                    }, label: {
+                        Image(systemName: "chevron.backward")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.app(.light12))
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                    })
+                    .buttonStyle(.plain)
                     
                     Text("Scan Options")
                         .textColor(.app(.light12))
@@ -121,20 +128,18 @@ struct ScanOptionView: View {
                     VStack {
                         LazyVGrid(columns: [.init(), .init()],spacing: 20, content: {
                             ForEach(ToolItem.allCases, id: \.self) { tool in
-                                ToolItemView(tool: tool)
-                                    .overlay(
-                                        ZStack(alignment: .topTrailing) {
-                                            Color.clear
-                                            Image("ic_ratio_\(viewModel.isSelected(tool: tool) ? "" : "un")select")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: 24)
-                                                .padding(8)
+                                Button(action: {
+                                    viewModel.input.didSelectToolOption.onNext(tool)
+                                }, label: {
+                                    ToolItemView(tool: tool)
+                                        .overlay(alignment: .topTrailing) {
+                                            Image(systemName: viewModel.isSelected(tool: tool) ? "checkmark.circle.fill" : "circle")
+                                                .font(.system(size: 20, weight: .semibold))
+                                                .foregroundColor(viewModel.isSelected(tool: tool) ? .app(.main) : .app(.light06))
+                                                .padding(10)
                                         }
-                                    )
-                                    .onTapGesture {
-                                        viewModel.input.didSelectToolOption.onNext(tool)
-                                    }
+                                })
+                                .buttonStyle(.plain)
                             }
                         })
                     }.padding(Const.padding)
@@ -167,20 +172,21 @@ struct ScanOptionView: View {
 // MARK: - ScanItemView
 fileprivate struct ScanItemView: View {
     var color: Color
-    var icon: String
+    var symbolName: String
     var name: String
     var body: some View {
         VStack(spacing: 0) {
             Spacer(minLength: 0)
             
             Circle()
-                .fill(color.opacity(0.1))
+                .fill(color.opacity(0.12))
                 .frame(height: Const.circleHeight)
                 .overlay(
-                    Image(icon)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: Const.circleHeight / 72 * 40)
+                    Image(systemName: symbolName)
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(color)
+                        .font(.system(size: Const.circleHeight / 72 * 32, weight: .semibold))
+                        .padding(12)
                 )
             
             Text(name)
@@ -194,12 +200,15 @@ fileprivate struct ScanItemView: View {
         .padding(Const.itemPadding)
         .frame(width: Const.itemWidth,
                height: Const.itemHeight)
-        .background(Color.white)
-        .cornerRadius(20, corners: .allCorners)
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(Color.white)
+                .shadow(color: .black.opacity(0.05), radius: 12, x: 0, y: 6)
+        )
+        .contentShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 }
 
 #Preview {
     HomeView(viewModel: HomeViewModel())
 }
-

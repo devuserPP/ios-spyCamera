@@ -18,10 +18,10 @@ struct HistoryView: View {
         if viewModel.historyItems.isEmpty {
             VStack(spacing: 0) {
                 Spacer()
-                Image("ic_history_empty")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 64)
+                Image(systemName: "clock.arrow.circlepath")
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundColor(.app(.light08))
+                    .font(.system(size: 56, weight: .semibold))
                 
                 Text("You have never scanned before. Scan now to ensure the safety of your area.")
                     .font(Poppins.regular.font(size: 14))
@@ -76,10 +76,10 @@ fileprivate struct HistoryItemView: View {
                 .fill(color.opacity(0.1))
                 .frame(width: 44, height: 44)
                 .overlay(
-                    Image(imageName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 24)
+                    Image(systemName: imageName)
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(color)
+                        .font(.system(size: 20, weight: .semibold))
                 )
             
             VStack(alignment: .leading, spacing: 5) {
@@ -95,14 +95,17 @@ fileprivate struct HistoryItemView: View {
             
             Spacer(minLength: 0)
             
-            Image(isSafe ? "ic_safe" : "ic_risk")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24)
+            Image(systemName: isSafe ? "checkmark.seal.fill" : "exclamationmark.triangle.fill")
+                .foregroundColor(isSafe ? .app(.safe) : .app(.warning))
+                .font(.system(size: 20, weight: .semibold))
         }
         .padding(20)
-        .background(Color.white)
-        .cornerRadius(16, corners: .allCorners)
+        .background(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(Color.white)
+                .shadow(color: .black.opacity(0.05), radius: 12, x: 0, y: 6)
+        )
+        .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
     
     var dateString: String {
@@ -124,11 +127,11 @@ fileprivate struct HistoryItemView: View {
     var imageName: String {
         switch item.type {
         case .quick:
-            "ic_tool_quickscan"
+            "bolt.shield"
         case .full:
-            "ic_tool_scanfull"
+            "viewfinder.circle"
         case .option:
-            "ic_tool_scanoption"
+            "slider.horizontal.3"
         }
     }
     
@@ -151,4 +154,3 @@ fileprivate struct HistoryItemView: View {
 #Preview {
     HomeView(viewModel: HomeViewModel())
 }
-

@@ -51,15 +51,16 @@ fileprivate struct MainView: View {
             
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    Image("ic_back")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
-                        .padding(20)
-                        .background(Color.clearInteractive)
-                        .onTapGesture {
-                            dismiss()
-                        }
+                    Button(action: {
+                        dismiss()
+                    }, label: {
+                        Image(systemName: "chevron.backward")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.app(.light12))
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                    })
+                    .buttonStyle(.plain)
                     
                     Text(title)
                         .font(Poppins.semibold.font(size: 16))

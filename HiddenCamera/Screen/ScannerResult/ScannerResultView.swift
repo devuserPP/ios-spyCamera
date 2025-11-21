@@ -267,14 +267,16 @@ struct ScannerResultView: View {
             }
             .overlay(
                 ZStack(alignment: .topTrailing) {
-                    Image("ic_close")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24)
-                        .padding(16)
-                        .onTapGesture {
-                            viewModel.selectedDeviceID = nil
-                        }
+                    Button(action: {
+                        viewModel.selectedDeviceID = nil
+                    }, label: {
+                        Image(systemName: "xmark.circle")
+                            .foregroundColor(.app(.light11))
+                            .font(.system(size: 24, weight: .semibold))
+                            .padding(16)
+                            .contentShape(Rectangle())
+                    })
+                    .buttonStyle(.plain)
                     
                     Color.clear
                 }
@@ -288,16 +290,17 @@ struct ScannerResultView: View {
     // MARK: - Navigation
     var navigationBar: some View {
         HStack(spacing: 0) {
-            Image("ic_back")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
-                .padding(20)
-                .background(Color.clearInteractive)
-                .onTapGesture {
-                    viewModel.input.didTapBack.onNext(())
-                }
-                .padding(.leading, 20)
+            Button(action: {
+                viewModel.input.didTapBack.onNext(())
+            }, label: {
+                Image(systemName: "chevron.backward")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.app(.light12))
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            })
+            .buttonStyle(.plain)
+            .padding(.leading, 20)
             
             Text("Scan Result")
                 .textColor(.app(.light12))
@@ -330,16 +333,17 @@ fileprivate struct FindView: View {
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                Image("ic_back")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
-                    .padding(20)
-                    .background(Color.clearInteractive)
-                    .onTapGesture {
-                        presentationMode.wrappedValue.dismiss()
-                        viewModel.selectedDeviceID = nil
-                    }
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                    viewModel.selectedDeviceID = nil
+                }, label: {
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(.app(.light12))
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                })
+                .buttonStyle(.plain)
                 
                 Text(device.deviceName() ?? "Unknown")
                     .textColor(.app(.light12))
@@ -502,15 +506,16 @@ fileprivate struct AddressView: View {
         NavigationView {
             VStack {
                 HStack(spacing: 0) {
-                    Image("ic_back")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
-                        .padding(20)
-                        .background(Color.clearInteractive)
-                        .onTapGesture {
-                            presentationMode.wrappedValue.dismiss()
-                        }
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "chevron.backward")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.app(.light12))
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                    })
+                    .buttonStyle(.plain)
                     
                     Text(device.deviceName() ?? "Unknown")
                         .textColor(.app(.light12))

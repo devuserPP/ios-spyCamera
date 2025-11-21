@@ -219,21 +219,22 @@ struct CameraResultView: View {
     
     var navigationBar: some View {
         HStack(spacing: 0) {
-            Image("ic_back")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
-                .padding(20)
-                .background(Color.clearInteractive)
-                .onTapGesture {
-                    if viewModel.item.tag != nil {
-                        viewModel.input.didTapBack.onNext(())
-                    } else {
-                        withAnimation {
-                            isShowingConfirmDialog = true
-                        }
+            Button(action: {
+                if viewModel.item.tag != nil {
+                    viewModel.input.didTapBack.onNext(())
+                } else {
+                    withAnimation {
+                        isShowingConfirmDialog = true
                     }
                 }
+            }, label: {
+                Image(systemName: "chevron.backward")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.app(.light12))
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            })
+            .buttonStyle(.plain)
             
             Text(viewModel.title)
                 .textColor(.app(.light12))

@@ -80,17 +80,19 @@ struct RemoveAdDialogView: View {
             .cornerRadius(20, corners: .allCorners)
             .overlay(
                 ZStack(alignment: .topTrailing) {
-                    Image("ic_close")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24)
-                        .padding(16)
-                        .onTapGesture {
-                            withAnimation {
-                                isShowing = false
-                                self.didTapContinueAds.onNext(())
-                            }
+                    Button(action: {
+                        withAnimation {
+                            isShowing = false
+                            self.didTapContinueAds.onNext(())
                         }
+                    }, label: {
+                        Image(systemName: "xmark.circle")
+                            .foregroundColor(.app(.light11))
+                            .font(.system(size: 24, weight: .semibold))
+                            .padding(16)
+                            .contentShape(Rectangle())
+                    })
+                    .buttonStyle(.plain)
                     
                     Color.clear
                 }

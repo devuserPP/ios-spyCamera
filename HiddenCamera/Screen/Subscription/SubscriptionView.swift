@@ -243,14 +243,16 @@ struct SubscriptionView: View {
                 .textColor(.app(.light01))
             
             HStack {
-                Image("ic_back")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 24)
-                    .padding()
-                    .onTapGesture {
-                        viewModel.didTapBack.onNext(())
-                    }
+                Button(action: {
+                    viewModel.didTapBack.onNext(())
+                }, label: {
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(.app(.light01))
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                })
+                .buttonStyle(.plain)
                 
                 Spacer()
             }

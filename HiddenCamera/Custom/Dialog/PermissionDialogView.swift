@@ -17,16 +17,16 @@ enum PermissionDialogType {
     case camera
     case bluetooth
     
-    var image: String {
+    var symbolName: String {
         switch self {
         case .location:
-            "ic_permission_location"
+            "location.circle.fill"
         case .localNetwork:
-            "ic_permission_localnetwork"
+            "network"
         case .camera:
-            "ic_permission_camera"
+            "camera.aperture"
         case .bluetooth:
-            "ic_tool_bluetooth"
+            "dot.radiowaves.left.and.right"
         }
     }
     
@@ -72,10 +72,15 @@ struct PermissionDialogView: View {
                 }
             
             VStack(spacing: 0) {
-                Image(type.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 96)
+                ZStack {
+                    Circle()
+                        .fill(Color.app(.main).opacity(0.1))
+                        .frame(width: 112, height: 112)
+                    Image(systemName: type.symbolName)
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(Color.app(.main), Color.app(.light12))
+                        .font(.system(size: 52, weight: .semibold))
+                }
                 
                 Text(type.title)
                     .textColor(.app(.light12))
@@ -109,10 +114,9 @@ struct PermissionDialogView: View {
             .cornerRadius(20, corners: .allCorners)
             .overlay(
                 ZStack(alignment: .topTrailing) {
-                    Image("ic_close")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24)
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.app(.light08))
+                        .font(.system(size: 24, weight: .semibold))
                         .padding(16)
                         .onTapGesture {
                             withAnimation {

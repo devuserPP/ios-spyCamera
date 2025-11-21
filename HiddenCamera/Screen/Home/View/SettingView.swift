@@ -65,16 +65,14 @@ struct SettingView: View {
                     .font(Poppins.semibold.font(size: 14))
                     .padding(.top, 20)
                 VStack(alignment: .leading, spacing: 0) {
-                    itemView(icon: "ic_setting_share", title: "Share app")
-                        .onTapGesture {
-                            viewModel.input.selectSettingItem.onNext(.share)
-                        }
+                    itemView(systemName: "square.and.arrow.up", title: "Share app") {
+                        viewModel.input.selectSettingItem.onNext(.share)
+                    }
                     
                     Color.app(.light04).frame(height: 1).padding(.horizontal, 20)
-                    itemView(icon: "ic_setting_star", title: "Rate app")
-                        .onTapGesture {
-                            viewModel.input.selectSettingItem.onNext(.rate)
-                        }
+                    itemView(systemName: "star.fill", title: "Rate app") {
+                        viewModel.input.selectSettingItem.onNext(.rate)
+                    }
                 }
                 .foreColor(.app(.light12))
                 .background(Color.white)
@@ -86,28 +84,24 @@ struct SettingView: View {
                     .padding(.top, 20)
                 
                 VStack(alignment: .leading, spacing: 0) {
-                    itemView(icon: "ic_setting_lock", title: "Privacy Policy")
-                        .onTapGesture {
-                            viewModel.input.selectSettingItem.onNext(.policy)
-                        }
+                    itemView(systemName: "lock.shield", title: "Privacy Policy") {
+                        viewModel.input.selectSettingItem.onNext(.policy)
+                    }
                     
                     Color.app(.light04).frame(height: 1).padding(.horizontal, 20)
-                    itemView(icon: "ic_setting_term", title: "Term of Condition")
-                        .onTapGesture {
-                            viewModel.input.selectSettingItem.onNext(.term)
-                        }
+                    itemView(systemName: "doc.text", title: "Term of Condition") {
+                        viewModel.input.selectSettingItem.onNext(.term)
+                    }
                     
                     Color.app(.light04).frame(height: 1).padding(.horizontal, 20)
-                    itemView(icon: "ic_setting_contact", title: "Contact Us")
-                        .onTapGesture {
-                            viewModel.input.selectSettingItem.onNext(.contact)
-                        }
+                    itemView(systemName: "envelope.badge", title: "Contact Us") {
+                        viewModel.input.selectSettingItem.onNext(.contact)
+                    }
                     
                     Color.app(.light04).frame(height: 1).padding(.horizontal, 20)
-                    itemView(icon: "ic_setting_restore", title: "Restore")
-                        .onTapGesture {
-                            viewModel.input.selectSettingItem.onNext(.restore)
-                        }
+                    itemView(systemName: "arrow.uturn.backward", title: "Restore") {
+                        viewModel.input.selectSettingItem.onNext(.restore)
+                    }
                 }
                 .foreColor(.app(.light12))
                 .background(Color.white)
@@ -120,21 +114,29 @@ struct SettingView: View {
         .navigationBarHidden(true)
     }
     
-    func itemView(icon: String, title: String) -> some View {
-        HStack(spacing: 0) {
-            Image(icon)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24)
-            
-            Text(title)
-                .font(Poppins.regular.font(size: 14))
-                .padding(.leading, 12)
-            
-            Spacer()
-        }
-        .padding(20)
-        .background(Color.clearInteractive)
+    func itemView(systemName: String, title: String, action: @escaping () -> Void) -> some View {
+        Button(action: action, label: {
+            HStack(spacing: 0) {
+                Image(systemName: systemName)
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundColor(.app(.light12))
+                    .font(.system(size: 18, weight: .semibold))
+                    .frame(width: 24)
+                
+                Text(title)
+                    .font(Poppins.regular.font(size: 14))
+                    .padding(.leading, 12)
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.app(.light08))
+                    .font(.system(size: 14, weight: .semibold))
+            }
+            .padding(20)
+            .contentShape(Rectangle())
+        })
+        .buttonStyle(.plain)
     }
 }
 

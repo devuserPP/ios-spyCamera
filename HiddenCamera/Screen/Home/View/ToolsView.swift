@@ -51,13 +51,14 @@ struct ToolItemView: View {
             Spacer(minLength: 0)
             
             Circle()
-                .fill(tool.color.opacity(0.1))
+                .fill(tool.color.opacity(0.12))
                 .frame(height: Const.circleHeight)
                 .overlay(
-                    Image(tool.icon)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: Const.circleHeight / 72 * 40)
+                    Image(systemName: tool.symbolName)
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(tool.color)
+                        .font(.system(size: Const.circleHeight / 72 * 32, weight: .semibold))
+                        .padding(12)
                 )
             
             Text(tool.name)
@@ -75,8 +76,12 @@ struct ToolItemView: View {
         .padding(Const.itemPadding)
         .frame(width: Const.itemWidth,
                height: Const.itemHeight)
-        .background(Color.white)
-        .cornerRadius(20, corners: .allCorners)
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(Color.white)
+                .shadow(color: .black.opacity(0.05), radius: 12, x: 0, y: 6)
+        )
+        .contentShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 }
 

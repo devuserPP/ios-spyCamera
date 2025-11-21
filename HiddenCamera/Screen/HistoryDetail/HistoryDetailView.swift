@@ -74,15 +74,16 @@ struct HistoryDetailView: View {
     
     var navigationBar: some View {
         HStack(spacing: 0) {
-            Image("ic_back")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
-                .padding(20)
-                .background(Color.clearInteractive)
-                .onTapGesture {
-                    viewModel.input.didTapBack.onNext(())
-                }
+            Button(action: {
+                viewModel.input.didTapBack.onNext(())
+            }, label: {
+                Image(systemName: "chevron.backward")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.app(.light12))
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            })
+            .buttonStyle(.plain)
             
             Text(title)
                 .textColor(.app(.light12))
@@ -132,10 +133,10 @@ fileprivate struct HistoryDetailItemView: View {
                     .fill(tool.color.opacity(0.1))
                     .frame(width: 44, height: 44)
                     .overlay(
-                        Image(tool.icon)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 24)
+                        Image(systemName: tool.symbolName)
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundColor(tool.color)
+                            .font(.system(size: 20, weight: .semibold))
                     )
                 
                 VStack(alignment: .leading) {
@@ -180,6 +181,11 @@ fileprivate struct HistoryDetailItemView: View {
                 }
             }
         }
+        .background(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(Color.white)
+                .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 6)
+        )
     }
     
     private func warningStatus(number: Int? = nil) -> some View {

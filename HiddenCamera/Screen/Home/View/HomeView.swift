@@ -25,6 +25,7 @@ fileprivate struct Const {
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
+    @State private var isAnimatingCrown = false
     
     var body: some View {
         ZStack {
@@ -52,71 +53,64 @@ struct HomeView: View {
     // MARK: - NavigationBar
     var navigationBar: some View {
         HStack {
-            switch viewModel.currentTab {
-            case .scan:
-                Text(AppConfig.appName)
-                    .font(Poppins.bold.font(size: 20))
-            case .tools:
-                Text("Tools")
-                    .font(Poppins.bold.font(size: 20))
-            case .history:
-                Text("History")
-                    .font(Poppins.bold.font(size: 20))
-            case .setting:
-                Text("Setting")
-                    .font(Poppins.bold.font(size: 20))
-            }
+            Text(viewModel.currentTab == .scan ? AppConfig.appName : viewModel.currentTab.title)
+                .font(Poppins.bold.font(size: 20))
             
             
             Spacer()
             
             if !viewModel.isPremium {
-                LottieView(animation: .named("premium"))
-                    .playing(loopMode: .loop)
-                    .onTapGesture {
-                        Analytics.logEvent("tap_premium_home", parameters: nil)
-                        viewModel.input.didTapPremiumButton.onNext(())
-                    }
-                    .frame(width: 30)
+                Button(action: {
+                    Analytics.logEvent("tap_premium_home", parameters: nil)
+                    viewModel.input.didTapPremiumButton.onNext(())
+                }, label: {
+                    Image(systemName: "crown.fill")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(Color(rgb: 0xFFA81F), Color(rgb: 0xF4C76A))
+                        .font(.system(size: 24, weight: .semibold))
+                        .padding(8)
+                        .background(Circle().fill(Color.white.opacity(0.9)))
+                        .shadow(color: Color.black.opacity(0.1), radius: 6, x: 0, y: 3)
+                        .scaleEffect(isAnimatingCrown ? 1.05 : 0.95)
+                        .animation(.easeInOut(duration: 1).repeatForever(autoreverses: true), value: isAnimatingCrown)
+                })
+                .buttonStyle(.plain)
+                .onAppear {
+                    isAnimatingCrown = true
+                }
             }
         }.frame(height: AppConfig.navigationBarHeight)
     }
     
     // MARK: - Tabbar
+    // MARK: - Tabbar
     var tabbar: some View {
         VStack(spacing: 0) {
-            HStack {
-                Spacer()
+            HStack(spacing: 0) {
                 ForEach(HomeTab.allCases, id: \.rawValue) { tab in
-                    VStack(spacing: 4) {
-                        Image("ic_tab_\(tab.rawValue)")
-                            .renderingMode(.template)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .foreColor(.app(tab == viewModel.currentTab ? .main : .light06))
-                            .frame(width: 24)
-                        
-                        Text(tab.rawValue.capitalized)
-                            .font(Poppins.medium.font(size: 14))
-                            .foreColor(.app(tab == viewModel.currentTab ? .main : .light06))
-                            .frame(height: 20)
-                    }
-                    .padding()
-                    .background(Color.clearInteractive)
-                    .onTapGesture {
+                    TabBarItem(tab: tab, isActive: tab == viewModel.currentTab) {
                         viewModel.input.selectTab.onNext(tab)
                     }
-                    
-                    Spacer()
                 }
             }
-            
+
             if !viewModel.isPremium && viewModel.didAppear {
-//                BannerContentView(isCollapse: true, needToReload: nil)
+                // BannerContentView(isCollapse: true, needToReload: nil)
             }
         }
-        .background(Color.white.cornerRadius(28, corners: [.topLeft, .topRight]).ignoresSafeArea())
+        .background(
+            ZStack(alignment: .top) {
+                Color.white.ignoresSafeArea(edges: .bottom)
+
+                // Jemný horní stín přesně jako na screenshotu
+                Color.black
+                    .opacity(0.06)
+                    .frame(height: 1)
+                    .blur(radius: 4)
+            }
+        )
     }
+
     
     // MARK: - Content
     var content: some View {
@@ -137,6 +131,33 @@ struct HomeView: View {
                 SettingView().opacity(viewModel.currentTab == .setting ? 1 : 0)
             }
         }
+    }
+}
+
+private struct TabBarItem: View {
+    let tab: HomeTab
+    let isActive: Bool
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action, label: {
+            VStack(spacing: 6) {
+                Image(systemName: tab.systemImage)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color.app(isActive ? .main : .light06))
+                    .font(.system(size: 20, weight: .semibold))
+                    .frame(width: 28, height: 24)
+                
+                Text(tab.title)
+                    .font(Poppins.medium.font(size: 13))
+                    .foreColor(.app(isActive ? .main : .light06))
+                    .frame(height: 18)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .contentShape(Rectangle())
+        })
+        .buttonStyle(.plain)
     }
 }
 
