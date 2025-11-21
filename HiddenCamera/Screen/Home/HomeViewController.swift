@@ -78,6 +78,10 @@ class HomeViewController: ViewController {
             self?.coordinator?.routeToMagnetic()
         }).disposed(by: self.disposeBag)
         
+        viewModel.routing.routeToManualScan.subscribe(onNext: { [weak self] _ in
+            self?.coordinator?.routeToManualScan()
+        }).disposed(by: self.disposeBag)
+        
         viewModel.routing.routeToScanOption.subscribe(onNext: { [weak self] item in
             self?.coordinator?.startScanOption(item: item)
         }).disposed(by: self.disposeBag)

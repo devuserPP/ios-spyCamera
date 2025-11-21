@@ -154,14 +154,14 @@ fileprivate struct HistoryDetailItemView: View {
             }
             
             if isSave {
-                if let result = viewModel.scanOption.suspiciousResult[tool] {
-                    if result == 0 {
-                        safeStatus()
-                    } else {
-                        switch tool {
-                        case .bluetoothScanner, .wifiScanner:
-                            warningStatus(number: result)
-                        case .cameraDetector, .magnetic, .infraredCamera:
+                        if let result = viewModel.scanOption.suspiciousResult[tool] {
+                            if result == 0 {
+                                safeStatus()
+                            } else {
+                                switch tool {
+                                case .bluetoothScanner, .wifiScanner:
+                                    warningStatus(number: result)
+                        case .cameraDetector, .magnetic, .infraredCamera, .manualScan:
                             warningStatus()
                         }
                     }

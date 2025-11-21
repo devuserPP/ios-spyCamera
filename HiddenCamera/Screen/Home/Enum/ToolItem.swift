@@ -14,6 +14,11 @@ enum ToolItem: String, CaseIterable {
     case cameraDetector
     case infraredCamera
     case magnetic
+    case manualScan
+    
+    static var scanSelectable: [ToolItem] {
+        return [.bluetoothScanner, .wifiScanner, .cameraDetector, .infraredCamera, .magnetic]
+    }
     
     var symbolName: String {
         switch self {
@@ -27,6 +32,8 @@ enum ToolItem: String, CaseIterable {
             "waveform.path"
         case .wifiScanner:
             "wifi"
+        case .manualScan:
+            "dot.radiowaves.up.forward"
         }
     }
     
@@ -42,6 +49,8 @@ enum ToolItem: String, CaseIterable {
             "Magnetometer"
         case .wifiScanner:
             "Wifi Devices Finder"
+        case .manualScan:
+            "Tracker Detector"
         }
     }
     
@@ -57,6 +66,8 @@ enum ToolItem: String, CaseIterable {
             Color(rgb: 0xFF4242)
         case .wifiScanner:
             Color(rgb: 0xFFA63D)
+        case .manualScan:
+            Color(rgb: 0x6B7CFF)
         }
     }
     
@@ -72,6 +83,8 @@ enum ToolItem: String, CaseIterable {
             "Detect spy cam via magnetic sensor"
         case .infraredCamera:
             "Effortlessly spot infrared cameras"
+        case .manualScan:
+            "Manually scan for nearby trackers"
         }
     }
 }

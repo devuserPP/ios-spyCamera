@@ -43,6 +43,7 @@ struct HomeViewModelRouting: RoutingOutput {
     var routeToWifiScanner = PublishSubject<()>()
     var routeToBluetoothScanner = PublishSubject<()>()
     var routeToMagnetic = PublishSubject<()>()
+    var routeToManualScan = PublishSubject<()>()
     
     var routeToScanOption = PublishSubject<ScanOptionItem>()
     var routeToHistoryDetail = PublishSubject<ScanOptionItem>()
@@ -135,6 +136,9 @@ final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput
                 } else {
                     SubscriptionViewController.open { }
                 }
+            case .manualScan:
+                Analytics.logEvent("feature_tool_manual_scan", parameters: nil)
+                routing.routeToManualScan.onNext(())
             }
         }).disposed(by: self.disposeBag)
         

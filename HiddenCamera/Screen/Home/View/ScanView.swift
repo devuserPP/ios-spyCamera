@@ -127,7 +127,7 @@ struct ScanOptionView: View {
                 ScrollView(.vertical) {
                     VStack {
                         LazyVGrid(columns: [.init(), .init()],spacing: 20, content: {
-                            ForEach(ToolItem.allCases, id: \.self) { tool in
+                            ForEach(ToolItem.scanSelectable, id: \.self) { tool in
                                 Button(action: {
                                     viewModel.input.didSelectToolOption.onNext(tool)
                                 }, label: {

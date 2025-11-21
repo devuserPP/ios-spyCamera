@@ -18,6 +18,7 @@ final class HomeCoordinator: WindowBasedCoordinator {
     private var wifiScannerCoordinator: WifiScannerCoordinator?
     private var bluetoothScannerCoordinator: BluetoothScannerCoordinator?
     private var magneticCoordinator: MagnetometerCoordinator?
+    private var manualScanCoordinator: ManualScanCoordinator?
     private var historyDetailCoordinator: HistoryDetailCoordinator?
     
     private var scanOptionItem: ScanOptionItem?
@@ -78,6 +79,11 @@ final class HomeCoordinator: WindowBasedCoordinator {
             scanOptionItem?.decrease()
         }
         
+        if let child = child as? ManualScanCoordinator {
+            print("remove screen: manualScanCoordinator")
+            self.manualScanCoordinator = nil
+        }
+        
         if child is HistoryDetailCoordinator {
             print("remove screen: historyDetailCoordinator")
             self.historyDetailCoordinator = nil
@@ -112,6 +118,8 @@ final class HomeCoordinator: WindowBasedCoordinator {
                 self.routeToMagnetic(scanOption: event.scanOption)
             case .infraredCamera:
                 self.routeToInfraredCamera(scanOption: event.scanOption)
+            case .manualScan:
+                self.routeToManualScan()
             }
             return true
         }
@@ -156,6 +164,8 @@ extension HomeCoordinator {
             routeToMagnetic(scanOption: option)
         case .infraredCamera:
             routeToInfraredCamera(scanOption: option)
+        case .manualScan:
+            routeToManualScan()
         }
         
         option.increase()
@@ -236,5 +246,13 @@ extension HomeCoordinator {
         }
         
         self.magneticCoordinator?.start()
+    }
+    
+    func routeToManualScan() {
+        if manualScanCoordinator == nil {
+            manualScanCoordinator = ManualScanCoordinator(navigationController: navigationController)
+            addChild(manualScanCoordinator!)
+        }
+        manualScanCoordinator?.start()
     }
 }
