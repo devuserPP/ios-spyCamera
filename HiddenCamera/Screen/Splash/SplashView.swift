@@ -1,20 +1,14 @@
-//
-//  SplashView.swift
-//  HiddenCamera
-//
-//  Created by Duc apple  on 9/1/25.
-//
-
 import SwiftUI
 
 fileprivate struct Const {
-    static let widthTriangle: CGFloat = UIScreen.main.bounds.width / 2
-    static let heightTriangle = widthTriangle / 394 * 352
+    static let iconWidth: CGFloat = UIScreen.main.bounds.width / 2
+    static let iconHeight: CGFloat = iconWidth // SF Symbols jsou čtvercové
 }
 
 struct SplashView: View {
-    @State var didAppear: Bool = false
-    @State var isAnimatingText: Bool = false
+    @State private var didAppear = false
+    @State private var showSecondIcon = false
+    @State private var isAnimatingText = false
     
     var body: some View {
         ZStack {
@@ -22,53 +16,54 @@ struct SplashView: View {
             
             VStack {
                 ZStack {
-                    Image("ic_splash_triangle")
+                    // 1) First icon (big scaling animation)
+                    Image(systemName: "tag.slash")
                         .resizable()
                         .scaledToFit()
-                        .aspectRatio(contentMode: didAppear ? .fit: .fill)
-                        .frame(width: didAppear ? Const.widthTriangle : UIScreen.main.bounds.height * 2)
-                        .animation(.easeInOut(duration: 2))
-                        .onAppear(perform: {
-                            self.didAppear = true
-                        })
-                        
-                    
-                    Image("ic_splash_camera")
+                        .foregroundColor(.black)
+                        .frame(width: Const.iconWidth * 0.5)
+                        .scaleEffect(didAppear ? 1 : UIScreen.main.bounds.height / Const.iconWidth)
+                        .animation(.easeInOut(duration: 1.8), value: didAppear)
+
+                    // 2) Fade-in second icon
+                    Image(systemName: "tag.circle.fill")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: Const.widthTriangle)
-                        .opacity(didAppear ? 1 : 0)
-                        .animation(.easeInOut(duration: 1))
-                    
+                        .foregroundColor(.blue)
+                        .frame(width: Const.iconWidth)
+                        .opacity(showSecondIcon ? 1 : 0)
+                        .animation(.easeInOut(duration: 1), value: showSecondIcon)
                 }
                 .zIndex(1)
                 
+                // 3) Animated text reveal
                 Text(AppConfig.appName)
                     .font(Poppins.semibold.font(size: 30))
                     .padding(.top, 10)
                     .overlay(
-                        GeometryReader(content: { geometry in
-                            HStack {
-                                if isAnimatingText {
-                                    Color.clear
-                                        .frame(width: isAnimatingText ? geometry.size.width : 0)
-                                }
-                                
+                        GeometryReader { geometry in
+                            HStack(spacing: 0) {
                                 Color.app(.light03)
-                                    .frame(width: !isAnimatingText ? geometry.size.width : 0)
+                                    .frame(width: isAnimatingText ? 0 : geometry.size.width)
+                                Spacer()
                             }
-                        })
+                            .animation(.easeInOut(duration: 1), value: isAnimatingText)
+                        }
                     )
-                    .animation(.easeInOut(duration: 1), value: isAnimatingText)
-            }.offset(y: -Const.heightTriangle/2)
-        }
-        .onAppear(perform: {
-            self.didAppear = true
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self.isAnimatingText = true
             }
-        })
+            .offset(y: -Const.iconHeight / 2)
+        }
+        .onAppear {
+            didAppear = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                showSecondIcon = true
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                isAnimatingText = true
+            }
+        }
     }
 }
 
