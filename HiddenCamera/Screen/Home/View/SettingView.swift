@@ -34,21 +34,15 @@ struct SettingView: View {
                             GeometryReader(content: { geometry in
                                 HStack {
                                     VStack(alignment: .leading, spacing: 0) {
-                                        Text("Get PREMIUM to\nUnlimited Access")
-                                            .textColor(.white)
-                                            .font(Poppins.bold.font(size: 18))
-                                            .autoResize(numberLines: 2)
-                                        
-                                        Spacer(minLength: 0)
                                         
                                         Button(action: {
                                             viewModel.input.didTapPremiumButton.onNext(())
                                         }, label: {
                                             ZStack {
-                                                Color.app(.main)
-                                                Text("Go Premium")
-                                                    .textColor(.white)
-                                                    .font(Poppins.medium.font(size: 13))
+//                                                Color.app(.main)
+                                                Text("Get Premium")
+                                                    .textColor(.yellow)
+                                                    .font(Poppins.medium.font(size: 15))
                                             }
                                             .frame(height: 30)
                                             .cornerRadius(30, corners: .allCorners)

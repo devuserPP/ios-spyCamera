@@ -246,7 +246,7 @@ struct SubscriptionView: View {
                 Button(action: {
                     viewModel.didTapBack.onNext(())
                 }, label: {
-                    Image(systemName: "chevron.backward")
+                    Image(systemName: "xmark")
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(.app(.light01))
                         .frame(width: 44, height: 44)
