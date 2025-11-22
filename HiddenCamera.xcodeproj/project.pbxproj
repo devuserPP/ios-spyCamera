@@ -29,8 +29,6 @@
 		852E290E2D27E4EC00293218 /* WifiScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E290A2D27E4EC00293218 /* WifiScannerViewModel.swift */; };
 		852E29112D27E87300293218 /* WifiScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E29102D27E87300293218 /* WifiScannerView.swift */; };
 		852E29272D27E90600293218 /* iphoneModels.json in Resources */ = {isa = PBXBuildFile; fileRef = 852E29132D27E90600293218 /* iphoneModels.json */; };
-		852E29282D27E90600293218 /* macModels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 852E29142D27E90600293218 /* macModels.plist */; };
-		852E29292D27E90600293218 /* macVendors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 852E29152D27E90600293218 /* macVendors.plist */; };
 		852E292A2D27E90600293218 /* NetServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E29172D27E90600293218 /* NetServiceExtension.swift */; };
 		852E292B2D27E90600293218 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E29192D27E90600293218 /* Device.swift */; };
 		852E292C2D27E90600293218 /* DeviceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E291A2D27E90600293218 /* DeviceService.swift */; };
@@ -181,8 +179,6 @@
 		852E290A2D27E4EC00293218 /* WifiScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiScannerViewModel.swift; sourceTree = "<group>"; };
 		852E29102D27E87300293218 /* WifiScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiScannerView.swift; sourceTree = "<group>"; };
 		852E29132D27E90600293218 /* iphoneModels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iphoneModels.json; sourceTree = "<group>"; };
-		852E29142D27E90600293218 /* macModels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = macModels.plist; sourceTree = "<group>"; };
-		852E29152D27E90600293218 /* macVendors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = macVendors.plist; sourceTree = "<group>"; };
 		852E29172D27E90600293218 /* NetServiceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetServiceExtension.swift; sourceTree = "<group>"; };
 		852E29192D27E90600293218 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		852E291A2D27E90600293218 /* DeviceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceService.swift; sourceTree = "<group>"; };
@@ -386,8 +382,6 @@
 			isa = PBXGroup;
 			children = (
 				852E29132D27E90600293218 /* iphoneModels.json */,
-				852E29142D27E90600293218 /* macModels.plist */,
-				852E29152D27E90600293218 /* macVendors.plist */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -932,7 +926,6 @@
 				85DA724F2D1E9392008F5589 /* Poppins-Bold.ttf in Resources */,
 				85DA72512D1E9392008F5589 /* Poppins-Italic.ttf in Resources */,
 				85DA72502D1E9392008F5589 /* Poppins-Regular.ttf in Resources */,
-				852E29292D27E90600293218 /* macVendors.plist in Resources */,
 				85DA724D2D1E9392008F5589 /* Poppins-SemiBold.ttf in Resources */,
 				856A1CE12D364C6F0085C170 /* tapfinger.json in Resources */,
 				852E29272D27E90600293218 /* iphoneModels.json in Resources */,
@@ -941,7 +934,6 @@
 				85EDFA682D3122AC002BF8F3 /* NativeAdView.xib in Resources */,
 				85DA724E2D1E9392008F5589 /* Poppins-Medium.ttf in Resources */,
 				856A1CDD2D3624990085C170 /* scanning.json in Resources */,
-				852E29282D27E90600293218 /* macModels.plist in Resources */,
 				85EDFA622D311837002BF8F3 /* SmallNativeView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

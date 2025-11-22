@@ -3,10 +3,29 @@
 - Přidal jsem podporu “swipe to delete” u historie
 - prvni pokus integrace tracker detector
 - druhy pokus o integraci
-- renamed and setup firebase project 
+- renamed and setup firebase project
+- smazano identifikace zarizeni na zaklade mac adresu na telefonech, je to blokovano 
 
 TODO:
 
+
+klicova slova
+Identify
+Suspicious Devices
+
+Infrared Camera
+Detection
+
+Secure
+Your Network
+
+Access
+Device Details
+
+
+tracker detector
+
+spy device detector
 
 
 

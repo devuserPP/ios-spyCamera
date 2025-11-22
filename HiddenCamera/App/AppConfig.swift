@@ -20,4 +20,7 @@ class AppConfig {
     static let bluetoothDuration: Double = 6.0
     
     static let limitFeatureNumber: Int = 2
+    
+    // External services
+    static let macLookupAPIKey = "01k7nkx8fy86g8aybnv8wd6qz101k7nm1hfcghrgpa87be7cn13bqwt12bs8p1nb"
 }

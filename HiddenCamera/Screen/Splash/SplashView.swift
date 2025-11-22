@@ -21,7 +21,7 @@ struct SplashView: View {
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(.black)
-                        .frame(width: Const.iconWidth * 0.5)
+                        .frame(width: Const.iconWidth * 0.52)
                         .scaleEffect(didAppear ? 1 : UIScreen.main.bounds.height / Const.iconWidth)
                         .animation(.easeInOut(duration: 1.8), value: didAppear)
 
